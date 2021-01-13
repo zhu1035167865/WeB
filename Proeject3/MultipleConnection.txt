@@ -1,0 +1,29 @@
+import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+class MultipleConnection implements Runnable{
+    public final Socket clntSock;
+    private static final int BUFSIZE = 32;
+    MultipleConnection(Socket clntSock) {
+        this.clntSock = clntSock;
+    }
+    public void run() {
+        System.out.println("Handling client at " + clntSock.getInetAddress().getHostAddress() + " on port " +clntSock.getPort());
+        InputStream in = null;
+        OutputStream out = null;
+        try {
+            int recvMsgSize; 
+            byte[] byteBuffer = new byte[BUFSIZE];
+            in = clntSock.getInputStream();
+            out = clntSock.getOutputStream();
+            while ((recvMsgSize = in.read(byteBuffer)) != -1)
+                out.write(byteBuffer, 0, recvMsgSize);
+            clntSock.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+}
