@@ -1,0 +1,20 @@
+/**
+ * Auto Generated Java Class.
+ */
+public class Anotherclass extends Mainclass {
+  public static void shuffle (char[] list) /*list to be shuffled*/
+{ Random gen=new Random();
+  int i;
+  char temp;
+  
+ for(int startIndex=0; startIndex<list.length-1; startIndex++)
+ {  i=gen.nextInt(7-startIndex)+startIndex;
+    
+   temp=list[i];
+   list[i]=list[startIndex];
+   list[startIndex]=temp;
+
+ }}
+  /* ADD YOUR CODE HERE */
+  
+}
